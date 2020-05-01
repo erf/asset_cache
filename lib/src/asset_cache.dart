@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-/// A generic cache for assets, which return a type [T] given an [AssetDecoder]
+/// A generic cache of type [T]
 abstract class GenericCache<T> {
   /// a map for caching types of T in memory
   Map<String, Future<T>> _cache = {};
@@ -13,14 +13,19 @@ abstract class GenericCache<T> {
   /// optional base path so you don't have to type full path
   String basePath;
 
+  /// override this to load a resource given a key
   Future<T> loadAsset(String key);
 
+  /// return resource if in cache, if not call [loadAsset]
   Future<T> load(String key) => _cache.putIfAbsent(key, () => loadAsset(key));
 }
 
+/// The asset decoder declaration
+///
+/// Given a [ByteData] returns a type T
 typedef AssetDecoder<T> = Future<T> Function(ByteData);
 
-/// A generic cache for assets, which return a type [T] given an [AssetDecoder]
+/// A generic cache for loading assets of type [T] given an [AssetDecoder]
 class AssetCache<T> extends GenericCache<T> {
   /// decode asset bytes to type T
   AssetDecoder<T> decoder;
@@ -28,7 +33,7 @@ class AssetCache<T> extends GenericCache<T> {
   /// optional asset bundle
   AssetBundle bundle;
 
-  /// add asset decoder in constructor
+  /// add asset decoder in constructor, and optional bundle
   AssetCache(this.decoder, {this.bundle});
 
   /// load an asset from a bundle given a key and optional base path and
@@ -41,8 +46,6 @@ class AssetCache<T> extends GenericCache<T> {
       return await decoder(await rootBundle.load(key));
     }
   }
-
-  Future<T> load(String key) => _cache.putIfAbsent(key, () => loadAsset(key));
 }
 
 /// A singleton asset caches for images
