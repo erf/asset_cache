@@ -1,6 +1,6 @@
 # asset_cache
 
-A flutter package for loading and cache assets in memory.
+A flutter [package](https://pub.dev/packages/asset_cache) for loading and cache assets in memory.
 
 **asset_cache** can load any types; just inherit from `AssetCache<T>` and give it 
 a decoder which decodes a `ByteData` into the correct type `T`.

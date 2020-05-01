@@ -12,7 +12,8 @@ class MyBundle extends AssetBundle {
   }
 
   @override
-  Future<T> loadStructuredData<T>(String key, Future<T> Function(String value) parser) {
+  Future<T> loadStructuredData<T>(
+      String key, Future<T> Function(String value) parser) {
     return Future.value(null);
   }
 }

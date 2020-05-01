@@ -1,3 +1,6 @@
+## [0.1.4]
+- update README | format
+
 ## [0.1.3]
 - update README
 
@@ -5,6 +8,9 @@
 - update README
 
 ## [0.1.1]
+- update README
+
+## [0.1.0]
 - initial release
 - generic asset cache for loading assets given a decoder
 - a set of asset cache implementations for images, json files and strings

@@ -50,7 +50,8 @@ class AssetCache<T> extends GenericCache<T> {
 
 /// A singleton asset caches for images
 class ImageAssets extends AssetCache<Image> {
-  static final _decoder = (ByteData data) => decodeImageFromList(data.buffer.asUint8List());
+  static final _decoder =
+      (ByteData data) => decodeImageFromList(data.buffer.asUint8List());
 
   ImageAssets._privateConstructor() : super(_decoder);
 
@@ -59,16 +60,19 @@ class ImageAssets extends AssetCache<Image> {
 
 /// A singleton asset caches for images as Uint8List
 class ImageAsUint8List extends AssetCache<Uint8List> {
-  static final _decoder = (ByteData data) => Future.value(data.buffer.asUint8List());
+  static final _decoder =
+      (ByteData data) => Future.value(data.buffer.asUint8List());
 
   ImageAsUint8List._privateConstructor() : super(_decoder);
 
-  static final ImageAsUint8List instance = ImageAsUint8List._privateConstructor();
+  static final ImageAsUint8List instance =
+      ImageAsUint8List._privateConstructor();
 }
 
 /// A singleton asset caches for strings
 class StringAssets extends AssetCache<String> {
-  static final _decoder = (ByteData data) => Future.value(utf8.decode(data.buffer.asUint8List()));
+  static final _decoder =
+      (ByteData data) => Future.value(utf8.decode(data.buffer.asUint8List()));
 
   StringAssets._privateConstructor() : super(_decoder);
 
@@ -77,8 +81,8 @@ class StringAssets extends AssetCache<String> {
 
 /// A singleton asset caches for json files
 class JsonAssets extends AssetCache<dynamic> {
-  static final _decoder =
-      (ByteData data) => Future.value(jsonDecode(utf8.decode(data.buffer.asUint8List())));
+  static final _decoder = (ByteData data) =>
+      Future.value(jsonDecode(utf8.decode(data.buffer.asUint8List())));
 
   JsonAssets._privateConstructor() : super(_decoder);
 
