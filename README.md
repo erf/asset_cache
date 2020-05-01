@@ -10,6 +10,6 @@ strings and json files.
 
 See `ImageAssets`, `ImageAsUint8List`, `StringAssets` and `JsonAssets`.
 
-This was based on `CachingAssetBundle`.
+Based on [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html).
 
 See [example](example).
