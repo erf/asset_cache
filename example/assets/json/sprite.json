@@ -1,0 +1,11 @@
+{
+  "imageRect": {
+    "image": "rogue.png",
+    "rect": [ 0, 0, 100, 100 ]
+  },
+  "transform": {
+    "translate": [ 0, 0 ],
+    "scale": 1.0,
+    "anchor": [50, 50]
+  }
+}
