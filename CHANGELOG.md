@@ -1,3 +1,6 @@
+## [0.1.2]
+- update README
+
 ## [0.1.1]
 - initial release
 - generic asset cache for loading assets given a decoder
