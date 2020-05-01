@@ -1,22 +1,28 @@
 # asset_cache
 
-A library for loading and cache assets, in memory, of generic types.
+A flutter package for loading and cache assets in memory.
 
-Inherit from `AssetCache` and give it a decoder, or inherit from `GenericCache` and overload the 
-`loadAsset` method.
+**asset_cache** can load any types; just inherit from `AssetCache<T>` and give it 
+a decoder which decodes a `ByteData` into the correct type `T`.
 
-The library comes with ready to use asset cache implementations as singletons for loading images, 
-strings and json files: `ImageAssets`, `ImageAsUint8List`, `StringAssets` and `JsonAssets`.
+The library comes with implementations for loading **images**, 
+**json** and **strings**, using the following singletons:
 
-Set `basePath` to avoid entering full path for assets.
+- `ImageAssets`
+- `ImageAsUint8List`
+- `StringAssets` 
+- `JsonAssets`
 
-Remember to add assets in `pubspec.yaml` like so:
+You can set the `AssetCache.basePath` to avoid using full paths for assets.
+
+Remember to add assets in `pubspec.yaml`, like:
+
 ```
   assets:
      - assets/images/
      - assets/json/
 ```
 
-See [test](test) and [example](example).
+Also, see [test](test) and [example](example).
 
 Based on [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html).

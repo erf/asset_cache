@@ -1,6 +1,6 @@
 name: asset_cache
 description: generic asset cache with implementations for image, json and strings
-version: 0.1.2
+version: 0.1.3
 homepage: https://github.com/erf/asset_cache
 
 environment:
