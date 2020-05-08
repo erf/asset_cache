@@ -8,6 +8,5 @@ class ByteDataAssets extends AssetCache<ByteData> {
 
   ByteDataAssets._privateConstructor() : super(_decoder);
 
-  static final ByteDataAssets instance =
-      ByteDataAssets._privateConstructor();
+  static final ByteDataAssets instance = ByteDataAssets._privateConstructor();
 }
