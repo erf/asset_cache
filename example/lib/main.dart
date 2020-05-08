@@ -5,6 +5,9 @@ import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  StringAssets.instance.basePath = 'assets/strings/';
+  ByteDataAssets.instance.basePath = 'assets/images/';
+  JsonAssets.instance.basePath = 'assets/json/';
   runApp(MyApp());
 }
 
@@ -38,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             FutureBuilder(
-              future: StringAssets.instance.load('assets/strings/hello.txt'),
+              future: StringAssets.instance.load('hello.txt'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(snapshot.data);
@@ -47,18 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
             ),
-            FutureBuilder<Uint8List>(
-              future: ImageAsUint8List.instance.load('assets/images/angel.png'),
+            FutureBuilder<ByteData>(
+              future: ByteDataAssets.instance.load('angel.png'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Image.memory(snapshot.data);
+                  return Image.memory(snapshot.data.buffer.asUint8List());
                 } else {
                   return Text('loading..');
                 }
               },
             ),
             FutureBuilder(
-              future: JsonAssets.instance.load('assets/json/sprite.json'),
+              future: JsonAssets.instance.load('sprite.json'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(snapshot.data.toString());

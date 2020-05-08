@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:asset_cache/asset_cache.dart';
+import '../lib//asset_cache.dart';
 
 class MyBundle extends AssetBundle {
   MyBundle();
