@@ -1,3 +1,7 @@
+## [0.2.1]
+- update pubspec.yaml
+- format
+
 ## [0.2.0]
 - split up asset_cache in multiple files
 - changed Uint8List decoder class to use ByteData
