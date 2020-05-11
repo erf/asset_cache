@@ -1,19 +1,16 @@
 # asset_cache
 
-**asset_cache** will load and cache any local asset type `T` given a decoder. 
+**asset_cache** will load and cache any asset of type `T` given a decoder. 
 
-Using `CachingAssetBundle`, Flutter will not cache binary resources. We therefor do it ourselves, 
-using `AssetBundle.load`.
+Since `CachingAssetBundle` does not cache binary data, we `load` and cache data 
+ourselves.
 
-You can create your own asset cache by inheriting from `AssetCache` and give it a decoder or by 
-inheriting from `GenericCache` and overriding `loadAsset`.
+> Binary resources (from load) are not cached.
 
-**asset_cache** comes with singletons for loading various resources:
+Create an asset cache by inheriting from `AssetCache` and give it a decoder. Or, 
+inherit from `GenericCache` and override `loadAsset`.
 
-- ImageAssets
-- JsonAssets
-- StringAssets
-- ByteDataAssets
+**asset_cache** includes singletons for loading: *images*, *json*, *strings* and *byte data*.
 
 ## Usage
 
@@ -32,18 +29,18 @@ Describe assets in your `pubspec.yaml`:
      - assets/json/
 ```
 
-You can set the `AssetCache.basePath` to avoid using full paths for assets:
+Set `AssetCache.basePath` to avoid using full asset paths:
 
 ```
-JsonAssets.instance.basePath = "assets/json/";
+ImageAssets.instance.basePath = "assets/images/";
 ```
 
-Now load and cache assets using `load`, which returns a `Future<T>`.
+Load and cache assets using `load`, which returns a `Future<T>`:
 
 ```
-final json = await JsonAssets.instance.load('sprite.json')
+final image = await ImageAssets.instance.load('sprite.png')
 ```
 
-See [example](example) and [test](test) for more.
+See [example](example) and [test](test)
 
 Based on [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html).

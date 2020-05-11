@@ -1,3 +1,6 @@
+## [0.2.2]
+- update README
+
 ## [0.2.1]
 - update pubspec.yaml
 - format
