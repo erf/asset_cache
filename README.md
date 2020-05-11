@@ -7,10 +7,15 @@ ourselves.
 
 > Binary resources (from load) are not cached.
 
-Create an asset cache by inheriting from `AssetCache` and give it a decoder. Or, 
+Create a custom asset cache by inheriting from `AssetCache` and pass it a decoder. Or 
 inherit from `GenericCache` and override `loadAsset`.
 
-**asset_cache** includes singletons for loading: *images*, *json*, *strings* and *byte data*.
+We include the following singletons for loading various asset types:
+
+- ImageAssets
+- JsonAssets
+- StringAssets
+- ByteDataAssets
 
 ## Usage
 
