@@ -3,9 +3,9 @@ import 'dart:typed_data';
 import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 
-final stringAssets = StringAssets()..basePath = 'assets/strings/';
-final byteAssets = ByteDataAssets()..basePath = 'assets/images/';
-final jsonAssets = JsonAssets()..basePath = 'assets/json/';
+final stringAssets = StringAssets(basePath: 'assets/strings/');
+final byteAssets = ByteDataAssets(basePath: 'assets/images/');
+final jsonAssets = JsonAssets(basePath: 'assets/json/');
 
 void main() {
   runApp(MyApp());

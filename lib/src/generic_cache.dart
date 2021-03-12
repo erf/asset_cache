@@ -6,6 +6,8 @@ abstract class GenericCache<T> {
   /// optional base path so you don't have to type full path
   String basePath;
 
+  GenericCache({this.basePath});
+
   /// override to load a local asset given a key (filename)
   Future<T> loadAsset(String key);
 
