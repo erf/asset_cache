@@ -1,3 +1,13 @@
+## [0.3.0] - 12 March 2021
+- breaking changes !!
+- replaced Singeltons with public constructors
+- pass optional basePath and bundle in constructors
+- don't make decoders static
+- rename special asset cache implementations to {Type}AssetCache
+- update example to use ImageAssetCache
+- use path to join basePath and asset name
+- code cleanup
+
 ## [0.2.3]
 - update README
 
