@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
+import 'package:path/path.dart' as p;
 
 import 'generic_cache.dart';
 
@@ -24,7 +25,7 @@ class AssetCache<T> extends GenericCache<T> {
   /// load an asset from a bundle given a key and optional base path and
   /// decode the asset using a given decoder
   Future<T> loadAsset(String name) async {
-    final String key = basePath == null ? name : basePath + name;
+    final String key = basePath == null ? name : p.join(basePath, name);
     return await decoder(await (bundle ?? rootBundle).load(key));
   }
 }
