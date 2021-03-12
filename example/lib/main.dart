@@ -1,13 +1,13 @@
 import 'dart:typed_data';
-import 'dart:ui' as ui;
 
 import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 
+final stringAssets = StringAssets()..basePath = 'assets/strings/';
+final byteAssets = ByteDataAssets()..basePath = 'assets/images/';
+final jsonAssets = JsonAssets()..basePath = 'assets/json/';
+
 void main() {
-  StringAssets.instance.basePath = 'assets/strings/';
-  ByteDataAssets.instance.basePath = 'assets/images/';
-  JsonAssets.instance.basePath = 'assets/json/';
   runApp(MyApp());
 }
 
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             FutureBuilder(
-              future: StringAssets.instance.load('hello.txt'),
+              future: stringAssets.load('hello.txt'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(snapshot.data);
@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             FutureBuilder<ByteData>(
-              future: ByteDataAssets.instance.load('angel.png'),
+              future: byteAssets.load('angel.png'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Image.memory(snapshot.data.buffer.asUint8List());
@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             FutureBuilder(
-              future: JsonAssets.instance.load('sprite.json'),
+              future: jsonAssets.load('sprite.json'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(snapshot.data.toString());
