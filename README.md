@@ -2,20 +2,9 @@
 
 **asset_cache** will load and cache any asset of type `T` given a decoder. 
 
-Since `CachingAssetBundle` does not cache binary data, we `load` and cache data 
-ourselves.
+I made this since [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html) does not cache binary data.
 
 > Binary resources (from load) are not cached.
-
-Create a custom asset cache by inheriting from `AssetCache` and pass it a decoder or 
-inherit from `GenericCache` and override `loadAsset`.
-
-We include the following AssetCache implementations:
-
-- ImageAssetCache
-- JsonAssetCache
-- StringAssetCache
-- ByteDataAssetCache
 
 ## Usage
 
@@ -34,7 +23,7 @@ Describe assets in your `pubspec.yaml`:
      - assets/json/
 ```
 
-Set `AssetCache.basePath` to avoid using full asset paths:
+Create asset cache objects with an optional `basePath` to avoid using full asset paths:
 
 ```
 final imageCache = ImageAssetCache(basePath: "assets/images/");
@@ -48,6 +37,19 @@ final image = await imageCache.load('sprite.png')
 final json = await jsonCache.load('sprite.json')
 ```
 
-See [example](example) and [test](test)
+We include the following `AssetCache` implementations:
 
-Based on [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html).
+- ImageAssetCache
+- JsonAssetCache
+- StringAssetCache
+- ByteDataAssetCache
+
+## Custom AssetCache
+
+Create a custom asset cache by inheriting from `AssetCache` and pass it a `AssetDecoder`.
+
+You can also inherit from `GenericCache` and override `loadAsset`, if you don't want to load from a `AssetBundle`.
+
+## More
+
+See [example](example) and [test](test).
