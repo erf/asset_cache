@@ -1,3 +1,6 @@
+## [1.0.0] - 12 March 2021
+- migrate to null-safety
+
 ## [0.3.0+2] - 12 March 2021
 - update README
 
