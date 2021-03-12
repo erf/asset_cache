@@ -8,7 +8,7 @@ import '../asset_cache.dart';
 
 /// An asset caches for images
 class ImageAssetCache extends AssetCache<Image> {
-  ImageAssetCache({String basePath, AssetBundle bundle})
+  ImageAssetCache({String? basePath, AssetBundle? bundle})
       : super((ByteData data) => decodeImageFromList(data.buffer.asUint8List()),
             basePath: basePath, bundle: bundle);
 }

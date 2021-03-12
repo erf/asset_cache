@@ -4,7 +4,7 @@ abstract class GenericCache<T> {
   Map<String, Future<T>> _cache = {};
 
   /// optional base path so you don't have to type full path
-  String basePath;
+  String? basePath;
 
   GenericCache({this.basePath});
 

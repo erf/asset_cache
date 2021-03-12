@@ -65,17 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: [
-            FutureBuilder(
+            FutureBuilder<String>(
               future: stringAssets.load('hello.txt'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data);
+                  return Text(snapshot.data ?? '');
                 } else {
                   return Text('loading..');
                 }
               },
             ),
-            FutureBuilder(
+            FutureBuilder<dynamic>(
               future: jsonAssets.load('sprite.json'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -85,12 +85,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
             ),
-            FutureBuilder(
+            FutureBuilder<ui.Image>(
               future: imageAssets.load('angel.png'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return CustomPaint(
-                    painter: MyImagePainter(snapshot.data),
+                    painter: MyImagePainter(snapshot.data!),
                   );
                 } else {
                   return Text('loading..');
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               future: byteAssets.load('angel.png'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Image.memory(snapshot.data.buffer.asUint8List());
+                  return Image.memory(snapshot.data!.buffer.asUint8List());
                 } else {
                   return Text('loading..');
                 }
