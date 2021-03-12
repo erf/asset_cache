@@ -1,3 +1,6 @@
+## [1.0.0+1] - 12 March 2021
+- pubspec description
+
 ## [1.0.0] - 12 March 2021
 - migrate to null-safety
 
