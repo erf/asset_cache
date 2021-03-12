@@ -7,15 +7,15 @@ ourselves.
 
 > Binary resources (from load) are not cached.
 
-Create a custom asset cache by inheriting from `AssetCache` and pass it a decoder. Or 
+Create a custom asset cache by inheriting from `AssetCache` and pass it a decoder or 
 inherit from `GenericCache` and override `loadAsset`.
 
-We include the following singletons for loading various asset types:
+We include the following AssetCache implementations:
 
-- ImageAssets
-- JsonAssets
-- StringAssets
-- ByteDataAssets
+- ImageAssetCache
+- JsonAssetCache
+- StringAssetCache
+- ByteDataAssetCache
 
 ## Usage
 
@@ -37,13 +37,15 @@ Describe assets in your `pubspec.yaml`:
 Set `AssetCache.basePath` to avoid using full asset paths:
 
 ```
-ImageAssets.instance.basePath = "assets/images/";
+final imageCache = ImageAssetCache(basePath: "assets/images/");
+final jsonCache = JsonAssetCache(basePath: "assets/json/");
 ```
 
 Load and cache assets using `load`, which returns a `Future<T>`:
 
 ```
-final image = await ImageAssets.instance.load('sprite.png')
+final image = await imageCache.load('sprite.png')
+final json = await jsonCache.load('sprite.json')
 ```
 
 See [example](example) and [test](test)
