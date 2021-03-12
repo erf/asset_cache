@@ -1,6 +1,6 @@
 name: asset_cache
 description: Load and cache any local asset type given a decoder, with singletons for loading images, json and more.
-version: 0.3.0+1
+version: 0.3.0+2
 homepage: https://github.com/erf/asset_cache
 
 environment:

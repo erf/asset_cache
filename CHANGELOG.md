@@ -1,3 +1,6 @@
+## [0.3.0+2] - 12 March 2021
+- update README
+
 ## [0.3.0+1] - 12 March 2021
 - update README
 
