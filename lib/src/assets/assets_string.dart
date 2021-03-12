@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'asset_cache.dart';
+import '../asset_cache.dart';
 
 /// An asset caches for strings
 class StringAssets extends AssetCache<String> {

@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'asset_cache.dart';
+import '../asset_cache.dart';
 
 /// An asset caches for ByteData
 class ByteDataAssets extends AssetCache<ByteData> {
