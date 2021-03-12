@@ -8,13 +8,6 @@ I made this since [CachingAssetBundle](https://api.flutter.dev/flutter/services/
 
 ## Usage
 
-Add `asset_cache` to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  asset_cache:
-```
-
 Describe assets in your `pubspec.yaml`:
 
 ```
