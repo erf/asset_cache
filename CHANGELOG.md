@@ -1,3 +1,6 @@
+## [0.3.0+1] - 12 March 2021
+- update README
+
 ## [0.3.0] - 12 March 2021
 - breaking changes !!
 - replaced Singeltons with public constructors
