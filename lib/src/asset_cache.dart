@@ -24,8 +24,6 @@ class AssetCache<T> extends GenericCache<T> {
   /// decode the asset using a given decoder
   Future<T> loadAsset(String name) async {
     final String key = basePath == null ? name : basePath + name;
-    return bundle != null
-        ? await decoder(await bundle.load(key))
-        : await decoder(await rootBundle.load(key));
+    return await decoder(await (bundle ?? rootBundle).load(key));
   }
 }
