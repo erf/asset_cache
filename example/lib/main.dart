@@ -5,6 +5,7 @@ import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 
 final stringAssets = StringAssetCache(basePath: 'assets/strings/');
+final stringAssetsWithoutBasePath = StringAssetCache();
 final jsonAssets = JsonAssetCache(basePath: 'assets/json/');
 final imageAssets = ImageAssetCache(basePath: 'assets/images/');
 final byteAssets = ByteDataAssetCache(basePath: 'assets/images/');
@@ -67,6 +68,17 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             FutureBuilder<String>(
               future: stringAssets.load('hello.txt'),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data ?? '');
+                } else {
+                  return Text('loading..');
+                }
+              },
+            ),
+            FutureBuilder<String>(
+              future: stringAssetsWithoutBasePath
+                  .load('assets/strings/hello-new-string.txt'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Text(snapshot.data ?? '');
