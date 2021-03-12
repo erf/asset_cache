@@ -1,11 +1,13 @@
+import 'dart:ui' as ui;
 import 'dart:typed_data';
 
 import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
 
-final stringAssets = StringAssets(basePath: 'assets/strings/');
-final byteAssets = ByteDataAssets(basePath: 'assets/images/');
-final jsonAssets = JsonAssets(basePath: 'assets/json/');
+final stringAssets = StringAssetCache(basePath: 'assets/strings/');
+final jsonAssets = JsonAssetCache(basePath: 'assets/json/');
+final imageAssets = ImageAssetCache(basePath: 'assets/images/');
+final byteAssets = ByteDataAssetCache(basePath: 'assets/images/');
 
 void main() {
   runApp(MyApp());
@@ -30,6 +32,29 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+class MyImagePainter extends CustomPainter {
+  final ui.Image image;
+
+  MyImagePainter(this.image);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final myPaint = Paint();
+
+    canvas.save();
+    canvas.translate(100, 100);
+    canvas.rotate(1.5);
+    canvas.scale(3.0);
+    canvas.drawImage(image, Offset.zero, myPaint);
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -50,21 +75,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
             ),
-            FutureBuilder<ByteData>(
-              future: byteAssets.load('angel.png'),
+            FutureBuilder(
+              future: jsonAssets.load('sprite.json'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Image.memory(snapshot.data.buffer.asUint8List());
+                  return Text(snapshot.data.toString());
                 } else {
                   return Text('loading..');
                 }
               },
             ),
             FutureBuilder(
-              future: jsonAssets.load('sprite.json'),
+              future: imageAssets.load('angel.png'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data.toString());
+                  return CustomPaint(
+                    painter: MyImagePainter(snapshot.data),
+                  );
+                } else {
+                  return Text('loading..');
+                }
+              },
+            ),
+            FutureBuilder<ByteData>(
+              future: byteAssets.load('angel.png'),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Image.memory(snapshot.data.buffer.asUint8List());
                 } else {
                   return Text('loading..');
                 }
