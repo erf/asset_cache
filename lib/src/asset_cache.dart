@@ -11,10 +11,10 @@ typedef AssetDecoder<T> = Future<T> Function(ByteData);
 /// A generic cache for loading assets of type [T] given an [AssetDecoder]
 class AssetCache<T> extends GenericCache<T> {
   /// Decode asset bytes to type T
-  AssetDecoder<T> decoder;
+  final AssetDecoder<T> decoder;
 
   /// Optional asset bundle
-  AssetBundle? bundle;
+  final AssetBundle? bundle;
 
   /// Add asset decoder in constructor, and optional bundle
   AssetCache(this.decoder, {this.bundle, String? basePath})
