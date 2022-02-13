@@ -1,14 +1,13 @@
+import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import '../lib/asset_cache.dart';
 
 class MyBundle extends AssetBundle {
   MyBundle();
 
   @override
   Future<ByteData> load(String key) {
-    return Future.value(null);
+    return Future.value(ByteData(0));
   }
 
   @override
