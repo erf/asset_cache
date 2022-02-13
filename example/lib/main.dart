@@ -11,10 +11,12 @@ final imageAssets = ImageAssetCache(basePath: 'assets/images/');
 final byteAssets = ByteDataAssetCache(basePath: 'assets/images/');
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,12 +25,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -61,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('asset cache demo'),
+        title: const Text('asset cache demo'),
       ),
       body: Center(
         child: Column(
@@ -72,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (snapshot.hasData) {
                   return Text(snapshot.data ?? '');
                 } else {
-                  return Text('loading..');
+                  return const Text('loading..');
                 }
               },
             ),
@@ -83,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (snapshot.hasData) {
                   return Text(snapshot.data ?? '');
                 } else {
-                  return Text('loading..');
+                  return const Text('loading..');
                 }
               },
             ),
@@ -93,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (snapshot.hasData) {
                   return Text(snapshot.data.toString());
                 } else {
-                  return Text('loading..');
+                  return const Text('loading..');
                 }
               },
             ),
@@ -105,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     painter: MyImagePainter(snapshot.data!),
                   );
                 } else {
-                  return Text('loading..');
+                  return const Text('loading..');
                 }
               },
             ),
@@ -115,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (snapshot.hasData) {
                   return Image.memory(snapshot.data!.buffer.asUint8List());
                 } else {
-                  return Text('loading..');
+                  return const Text('loading..');
                 }
               },
             ),
