@@ -1,7 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/services.dart';
-import 'package:path/path.dart' as p;
+import 'package:path/path.dart' as path;
 
 import 'generic_cache.dart';
 
@@ -12,20 +10,20 @@ typedef AssetDecoder<T> = Future<T> Function(ByteData);
 
 /// A generic cache for loading assets of type [T] given an [AssetDecoder]
 class AssetCache<T> extends GenericCache<T> {
-  /// decode asset bytes to type T
+  /// Decode asset bytes to type T
   AssetDecoder<T> decoder;
 
-  /// optional asset bundle
+  /// Optional asset bundle
   AssetBundle? bundle;
 
-  /// add asset decoder in constructor, and optional bundle
+  /// Add asset decoder in constructor, and optional bundle
   AssetCache(this.decoder, {this.bundle, String? basePath})
       : super(basePath: basePath);
 
-  /// load an asset from a bundle given a key and optional base path and
-  /// decode the asset using a given decoder
+  /// Load an asset from a bundle given a key and optional base path and decode
+  /// the asset using a given decoder
   Future<T> loadAsset(String name) async {
-    final String key = p.join(basePath ?? '', name);
+    final String key = path.join(basePath ?? '', name);
     return await decoder(await (bundle ?? rootBundle).load(key));
   }
 }
