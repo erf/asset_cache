@@ -1,3 +1,8 @@
+## [1.0.1] - 13 February 2022
+- make members final 
+- cleanup 
+- update license name / year
+
 ## [1.0.0+1] - 12 March 2021
 - pubspec description
 
