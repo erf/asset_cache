@@ -1,10 +1,10 @@
 /// An abstract generic cache of type [T]
 abstract class GenericCache<T> {
   /// A map for caching types of T in memory
-  Map<String, Future<T>> _cache = {};
+  final Map<String, Future<T>> _cache = {};
 
   /// Optional base path so you don't have to type full path
-  String? basePath;
+  final String? basePath;
 
   GenericCache({this.basePath});
 
