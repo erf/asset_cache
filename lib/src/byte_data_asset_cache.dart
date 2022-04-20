@@ -6,10 +6,10 @@ import '../asset_cache.dart';
 class ByteDataAssetCache extends AssetCache<ByteData> {
   ByteDataAssetCache({
     String? basePath,
-    AssetBundle? bundle,
+    AssetBundle? assetBundle,
   }) : super(
           decoder: (ByteData data) => data,
           basePath: basePath,
-          bundle: bundle,
+          assetBundle: assetBundle,
         );
 }

@@ -14,12 +14,12 @@ class AssetCache<T> extends GenericCache<T> {
   final AssetDecoder<T> decoder;
 
   /// Optional asset bundle
-  final AssetBundle? bundle;
+  final AssetBundle? assetBundle;
 
   /// Add asset decoder in constructor, and optional bundle
   AssetCache({
     required this.decoder,
-    this.bundle,
+    this.assetBundle,
     String? basePath,
   }) : super(basePath: basePath);
 
@@ -28,6 +28,6 @@ class AssetCache<T> extends GenericCache<T> {
   @override
   Future<T> loadAsset(String name) async {
     final String key = path.join(basePath ?? '', name);
-    return await decoder(await (bundle ?? rootBundle).load(key));
+    return await decoder(await (assetBundle ?? rootBundle).load(key));
   }
 }

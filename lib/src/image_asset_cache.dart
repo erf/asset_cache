@@ -9,11 +9,11 @@ import '../asset_cache.dart';
 class ImageAssetCache extends AssetCache<Image> {
   ImageAssetCache({
     String? basePath,
-    AssetBundle? bundle,
+    AssetBundle? assetBundle,
   }) : super(
           decoder: (ByteData data) =>
               decodeImageFromList(data.buffer.asUint8List()),
           basePath: basePath,
-          bundle: bundle,
+          assetBundle: assetBundle,
         );
 }

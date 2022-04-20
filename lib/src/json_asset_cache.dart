@@ -8,11 +8,11 @@ import '../asset_cache.dart';
 class JsonAssetCache extends AssetCache<dynamic> {
   JsonAssetCache({
     String? basePath,
-    AssetBundle? bundle,
+    AssetBundle? assetBundle,
   }) : super(
           decoder: (ByteData data) =>
               jsonDecode(utf8.decode(data.buffer.asUint8List())),
           basePath: basePath,
-          bundle: bundle,
+          assetBundle: assetBundle,
         );
 }
