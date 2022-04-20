@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 
@@ -6,7 +8,7 @@ import 'generic_cache.dart';
 /// The asset decoder declaration
 ///
 /// Given a [ByteData] returns a type [T]
-typedef AssetDecoder<T> = Future<T> Function(ByteData);
+typedef AssetDecoder<T> = FutureOr<T> Function(ByteData);
 
 /// A generic cache for loading assets of type [T] given an [AssetDecoder]
 class AssetCache<T> extends GenericCache<T> {
