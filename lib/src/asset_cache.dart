@@ -5,12 +5,10 @@ import 'package:path/path.dart' as path;
 
 import 'generic_cache.dart';
 
-/// The asset decoder declaration
-///
-/// Given a [ByteData] returns a type [T]
+/// Given a [ByteData] return a type [T]
 typedef AssetDecoder<T> = FutureOr<T> Function(ByteData);
 
-/// A generic cache for loading assets of type [T] given an [AssetDecoder]
+/// Generic cache for loading assets of type [T] given an [AssetDecoder]
 class AssetCache<T> extends GenericCache<T> {
   /// Decode asset bytes to type T
   final AssetDecoder<T> decoder;

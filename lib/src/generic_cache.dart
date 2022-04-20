@@ -1,4 +1,4 @@
-/// An abstract generic cache of type [T]
+/// Abstract generic cache of type [T]
 abstract class GenericCache<T> {
   /// A map for caching types of T in memory
   final Map<String, Future<T>> _cache = {};

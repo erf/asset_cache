@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../asset_cache.dart';
 
-/// An asset caches for strings
+/// Asset cache for strings
 class StringAssetCache extends AssetCache<String> {
   StringAssetCache({String? basePath, AssetBundle? bundle})
       : super(

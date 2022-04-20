@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../asset_cache.dart';
 
-/// An asset caches for json files
+/// Asset cache for JSON files
 class JsonAssetCache extends AssetCache<dynamic> {
   JsonAssetCache({String? basePath, AssetBundle? bundle})
       : super(
