@@ -1,21 +1,5 @@
 import 'package:asset_cache/asset_cache.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-class MyBundle extends AssetBundle {
-  MyBundle();
-
-  @override
-  Future<ByteData> load(String key) {
-    return Future.value(ByteData(0));
-  }
-
-  @override
-  Future<T> loadStructuredData<T>(
-      String key, Future<T> Function(String value) parser) {
-    return Future.value(null);
-  }
-}
 
 class MyCache extends GenericCache<String> {
   int counter = 0;
