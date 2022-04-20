@@ -17,8 +17,11 @@ class AssetCache<T> extends GenericCache<T> {
   final AssetBundle? bundle;
 
   /// Add asset decoder in constructor, and optional bundle
-  AssetCache({required this.decoder, this.bundle, String? basePath})
-      : super(basePath: basePath);
+  AssetCache({
+    required this.decoder,
+    this.bundle,
+    String? basePath,
+  }) : super(basePath: basePath);
 
   /// Load an asset from a bundle given a key and optional base path and decode
   /// the asset using a given decoder

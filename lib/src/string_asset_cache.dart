@@ -6,9 +6,12 @@ import '../asset_cache.dart';
 
 /// Asset cache for strings
 class StringAssetCache extends AssetCache<String> {
-  StringAssetCache({String? basePath, AssetBundle? bundle})
-      : super(
-            decoder: (ByteData data) => utf8.decode(data.buffer.asUint8List()),
-            basePath: basePath,
-            bundle: bundle);
+  StringAssetCache({
+    String? basePath,
+    AssetBundle? bundle,
+  }) : super(
+          decoder: (ByteData data) => utf8.decode(data.buffer.asUint8List()),
+          basePath: basePath,
+          bundle: bundle,
+        );
 }

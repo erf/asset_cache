@@ -6,10 +6,13 @@ import '../asset_cache.dart';
 
 /// Asset cache for JSON files
 class JsonAssetCache extends AssetCache<dynamic> {
-  JsonAssetCache({String? basePath, AssetBundle? bundle})
-      : super(
-            decoder: (ByteData data) =>
-                jsonDecode(utf8.decode(data.buffer.asUint8List())),
-            basePath: basePath,
-            bundle: bundle);
+  JsonAssetCache({
+    String? basePath,
+    AssetBundle? bundle,
+  }) : super(
+          decoder: (ByteData data) =>
+              jsonDecode(utf8.decode(data.buffer.asUint8List())),
+          basePath: basePath,
+          bundle: bundle,
+        );
 }
