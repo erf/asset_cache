@@ -6,11 +6,12 @@ abstract class GenericCache<T> {
   /// Optional base path so you don't have to type full path
   final String? basePath;
 
+  /// Constructor for [GenericCache] with optional [basePath]
   GenericCache({this.basePath});
 
-  /// Override to load a local asset given a key (filename)
+  /// Load and decode an asset from a bundle given a [key]
   Future<T> loadAsset(String key);
 
-  /// Return resource if in cache, if not call [loadAsset]
+  /// Load an asset from the cache or load it from the asset bundle and cache it
   Future<T> load(String key) => _cache.putIfAbsent(key, () => loadAsset(key));
 }

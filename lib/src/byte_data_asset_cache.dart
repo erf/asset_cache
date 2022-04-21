@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 
 import '../asset_cache.dart';
 
-/// Asset caches for ByteData
+/// Asset cache for ByteData
 class ByteDataAssetCache extends AssetCache<ByteData> {
   ByteDataAssetCache({
     String? basePath,
