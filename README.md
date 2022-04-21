@@ -2,7 +2,7 @@
 
 **asset_cache** will load and cache any asset of type `T` given a decoder. 
 
-I made this since [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html) does not cache binary data.
+It was made as [CachingAssetBundle](https://api.flutter.dev/flutter/services/CachingAssetBundle-class.html) does not cache binary data.
 
 > Binary resources (from load) are not cached.
 
@@ -16,21 +16,21 @@ Describe assets in your `pubspec.yaml`:
      - assets/json/
 ```
 
-Create asset cache objects with an optional `basePath` to avoid using full asset paths:
+Create asset cache instances with an optional `basePath` to avoid full paths:
 
 ```
 final imageCache = ImageAssetCache(basePath: "assets/images/");
 final jsonCache = JsonAssetCache(basePath: "assets/json/");
 ```
 
-Load and cache assets using `load`, which returns a `Future<T>`:
+Load and cache assets using `load` returns a `Future<T>`:
 
 ```
 final image = await imageCache.load('sprite.png')
 final json = await jsonCache.load('sprite.json')
 ```
 
-We include the following `AssetCache` implementations:
+The following `AssetCache` implementations are included:
 
 - ImageAssetCache
 - JsonAssetCache
