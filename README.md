@@ -34,7 +34,7 @@ We include the following `AssetCache` implementations:
 
 - ImageAssetCache
 - JsonAssetCache
-- StringAssetCache
+- TextAssetCache
 - ByteDataAssetCache
 
 ## Custom AssetCache
