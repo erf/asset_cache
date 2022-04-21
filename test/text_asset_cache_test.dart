@@ -18,9 +18,9 @@ class MyAssetBundle extends AssetBundle {
 }
 
 void main() {
-  group("StringAssetCache tests", () {
+  group("TextAssetCache tests", () {
     test('Load test.txt and verify text', () async {
-      final cache = StringAssetCache(assetBundle: MyAssetBundle());
+      final cache = TextAssetCache(assetBundle: MyAssetBundle());
       final String text = await cache.load("test/assets/test.txt");
       expect(text, 'Hello, world!');
     });

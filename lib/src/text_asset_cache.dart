@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import '../asset_cache.dart';
 
 /// Asset cache for text files
-class StringAssetCache extends AssetCache<String> {
-  StringAssetCache({
+class TextAssetCache extends AssetCache<String> {
+  TextAssetCache({
     String? basePath,
     AssetBundle? assetBundle,
   }) : super(
