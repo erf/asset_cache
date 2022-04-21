@@ -1,6 +1,6 @@
 name: asset_cache
-description: Load and cache binary asset of any type given a decoder. Built-in support for images, json and more.
-version: 1.0.1
+description: Load and cache binary asset of any type given a decoder. Built in support for byte data, images, json and text.
+version: 2.0.0
 homepage: https://github.com/erf/asset_cache
 
 environment:
