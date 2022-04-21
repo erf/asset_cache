@@ -1,3 +1,10 @@
+## [2.0.0] - 21 April 2022
+- make AssetDecoder return FutureOr and simplify decoders
+- make 'decoder' a named constructor parameter
+- rename bundle -> assetBundle
+- improve docs
+- add tests for all cache types
+
 ## [1.0.1] - 13 February 2022
 - make members final 
 - cleanup 
