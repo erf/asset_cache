@@ -21,7 +21,7 @@ class KeyStringAssetBundle extends AssetBundle {
 
 void main() {
   group("ByteDataAssetCache tests", () {
-    test('write key as ByteData value and fetch it', () async {
+    test('Cache and load key as ByteData', () async {
       final cache = ByteDataAssetCache(assetBundle: KeyStringAssetBundle());
       final ByteData result = await cache.load("test");
       final String str = utf8.decode(result.buffer.asUint8List());

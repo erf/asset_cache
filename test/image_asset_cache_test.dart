@@ -9,7 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   group("ByteDataAssetCache tests", () {
-    test('write key as ByteData value and fetch it', () async {
+    test('Load test.png and verify image', () async {
       final cache = ImageAssetCache(assetBundle: FileAssetBundle());
       final image = await cache.load('test/assets/test.png');
       expect(image.width, 54);
