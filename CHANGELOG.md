@@ -4,6 +4,7 @@
 - rename bundle -> assetBundle
 - improve docs
 - add tests for all cache types
+- rename StringAssetCache -> TextAssetCache
 
 ## [1.0.1] - 13 February 2022
 - make members final 
