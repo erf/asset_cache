@@ -1,26 +1,12 @@
-import 'dart:io';
-
 import 'package:asset_cache/asset_cache.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MyAssetBundle extends AssetBundle {
-  @override
-  Future<ByteData> load(String key) {
-    return File(key).readAsBytes().then((value) => value.buffer.asByteData());
-  }
-
-  @override
-  Future<T> loadStructuredData<T>(
-      String key, Future<T> Function(String value) parser) {
-    throw UnimplementedError();
-  }
-}
+import 'file_asset_bundle.dart';
 
 void main() {
   group("TextAssetCache tests", () {
     test('Load test.txt and verify text', () async {
-      final cache = TextAssetCache(assetBundle: MyAssetBundle());
+      final cache = TextAssetCache(assetBundle: FileAssetBundle());
       final String text = await cache.load("test/assets/test.txt");
       expect(text, 'Hello, world!');
     });
