@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'file_asset_bundle.dart';
 
 void main() {
-  group("JsonAssetCache tests", () {
+  group('JsonAssetCache tests', () {
     test('Load test.json and verify json', () async {
       final cache = JsonAssetCache(assetBundle: FileAssetBundle());
-      final json = await cache.load("test/assets/test.json");
+      final json = await cache.load('test/assets/test.json');
       expect(json['imageRect']['image'], 'rogue.png');
     });
   });

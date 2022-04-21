@@ -20,12 +20,12 @@ class KeyStringAssetBundle extends AssetBundle {
 }
 
 void main() {
-  group("ByteDataAssetCache tests", () {
+  group('ByteDataAssetCache tests', () {
     test('Cache and load key as ByteData', () async {
       final cache = ByteDataAssetCache(assetBundle: KeyStringAssetBundle());
-      final ByteData result = await cache.load("test");
+      final ByteData result = await cache.load('test');
       final String str = utf8.decode(result.buffer.asUint8List());
-      expect(str, "test");
+      expect(str, 'test');
     });
   });
 }

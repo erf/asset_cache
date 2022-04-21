@@ -5,10 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'file_asset_bundle.dart';
 
 void main() {
-  // initiate paint binding
   WidgetsFlutterBinding.ensureInitialized();
 
-  group("ByteDataAssetCache tests", () {
+  group('ByteDataAssetCache tests', () {
     test('Load test.png and verify image', () async {
       final cache = ImageAssetCache(assetBundle: FileAssetBundle());
       final image = await cache.load('test/assets/test.png');
