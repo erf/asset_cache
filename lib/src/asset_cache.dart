@@ -27,6 +27,8 @@ class AssetCache<T> extends GenericCache<T> {
   @override
   Future<T> loadAsset(String key) async {
     final String fullPath = path.join(basePath ?? '', key);
-    return await decoder(await (assetBundle ?? rootBundle).load(fullPath));
+    final ByteData bytes = await (assetBundle ?? rootBundle).load(fullPath);
+    final T asset = await decoder(bytes);
+    return asset;
   }
 }
