@@ -20,8 +20,8 @@ class AssetCache<T> extends GenericCache<T> {
   AssetCache({
     required this.decoder,
     this.assetBundle,
-    String? basePath,
-  }) : super(basePath: basePath);
+    super.basePath,
+  });
 
   /// Load and decode an asset from a bundle given a [key]
   @override

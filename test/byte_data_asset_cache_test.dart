@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/services.dart';
