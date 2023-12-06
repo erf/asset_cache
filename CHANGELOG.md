@@ -1,3 +1,7 @@
+## [2.1.0] - 6 dec 2023
+- update packages
+- use super in constructors
+
 ## [2.0.0] - 21 April 2022
 - make AssetDecoder return FutureOr and simplify decoders
 - make 'decoder' a named constructor parameter
