@@ -1,5 +1,5 @@
-import 'dart:ui' as ui;
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:asset_cache/asset_cache.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
 class MyImagePainter extends CustomPainter {
@@ -60,7 +60,7 @@ class MyImagePainter extends CustomPainter {
   }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
