@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:asset_cache/asset_cache.dart';
+
 /// Abstract generic cache of type [T]
 abstract class GenericCache<T> {
   /// A map for caching types of T in memory
@@ -14,6 +18,28 @@ abstract class GenericCache<T> {
 
   /// Load an asset from the cache or load it from the asset bundle and cache it
   Future<T> load(String key) => _cache.putIfAbsent(key, () => loadAsset(key));
+
+  /// Preload multiple assets concurrently for better performance
+  /// Returns a Future that completes when all assets are loaded
+  /// Remember to call `WidgetsFlutterBinding.ensureInitialized()` before initializing the cache at the start of your app
+  /// This method will throw a [PreLoadingAssetsNotFoundException] if any asset fails to load
+  Future<List<T>> preload(List<String> keys) async {
+    // Start loading all assets concurrently
+    final futures = keys.map((key) => load(key));
+
+    // Wait for all to complete (including failures)
+    try {
+      return await Future.wait(futures, eagerError: true);
+    } catch (e, stackTrace) {
+      // Handle errors if needed, but they will be cached as failed Futures
+      throw PreLoadingAssetsNotFoundException(
+        'Failed to preload some assets: $e',
+        assetKeys: keys,
+        originalException: e,
+        originalStackTrace: stackTrace,
+      );
+    }
+  }
 
   /// Clear all cached items
   void clear() => _cache.clear();

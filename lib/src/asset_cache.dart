@@ -37,7 +37,6 @@ class AssetCache<T> extends GenericCache<T> {
       throw AssetNotFoundException(
         'Failed to load asset',
         assetKey: key,
-        fullPath: fullPath,
         originalException: e,
         originalStackTrace: stackTrace,
       );

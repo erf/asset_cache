@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'file_asset_bundle.dart';
 
 class FailingDecoder extends AssetCache<String> {
-  FailingDecoder({super.assetBundle}) : super(decoder: (data) => throw Exception('Decoding failed'));
+  FailingDecoder({super.assetBundle})
+      : super(decoder: (data) => throw Exception('Decoding failed'));
 }
 
 void main() {
@@ -12,24 +13,23 @@ void main() {
     test('AssetNotFoundException contains correct information', () {
       final originalException = Exception('File not found');
       final stackTrace = StackTrace.current;
-      
+
       final exception = AssetNotFoundException(
         'Test message',
         assetKey: 'test.txt',
-        fullPath: 'assets/test.txt',
         originalException: originalException,
         originalStackTrace: stackTrace,
       );
 
       expect(exception.message, 'Test message');
       expect(exception.assetKey, 'test.txt');
-      expect(exception.fullPath, 'assets/test.txt');
       expect(exception.originalException, originalException);
       expect(exception.originalStackTrace, stackTrace);
-      expect(exception.toString(), contains('AssetNotFoundException: Test message'));
+      expect(exception.toString(),
+          contains('AssetNotFoundException: Test message'));
       expect(exception.toString(), contains('(asset: test.txt)'));
-      expect(exception.toString(), contains('(path: assets/test.txt)'));
-      expect(exception.toString(), contains('(caused by: Exception: File not found)'));
+      expect(exception.toString(),
+          contains('(caused by: Exception: File not found)'));
     });
 
     test('AssetNotFoundException without optional parameters', () {
@@ -37,14 +37,13 @@ void main() {
 
       expect(exception.message, 'Simple message');
       expect(exception.assetKey, isNull);
-      expect(exception.fullPath, isNull);
       expect(exception.toString(), 'AssetNotFoundException: Simple message');
     });
 
     test('DecodingException contains correct information', () {
       final originalException = Exception('Original error');
       final stackTrace = StackTrace.current;
-      
+
       final exception = DecodingException(
         'Decoding failed',
         assetKey: 'image.png',
@@ -56,9 +55,11 @@ void main() {
       expect(exception.assetKey, 'image.png');
       expect(exception.originalException, originalException);
       expect(exception.originalStackTrace, stackTrace);
-      expect(exception.toString(), contains('DecodingException: Decoding failed'));
+      expect(
+          exception.toString(), contains('DecodingException: Decoding failed'));
       expect(exception.toString(), contains('(asset: image.png)'));
-      expect(exception.toString(), contains('(caused by: Exception: Original error)'));
+      expect(exception.toString(),
+          contains('(caused by: Exception: Original error)'));
     });
 
     test('DecodingException without optional parameters', () {
@@ -79,8 +80,8 @@ void main() {
         () => cache.load('nonexistent.txt'),
         throwsA(isA<AssetNotFoundException>()
             .having((e) => e.assetKey, 'assetKey', 'nonexistent.txt')
-            .having((e) => e.fullPath, 'fullPath', 'nonexistent.txt')
-            .having((e) => e.originalException, 'originalException', isNotNull)),
+            .having(
+                (e) => e.originalException, 'originalException', isNotNull)),
       );
     });
 
@@ -89,14 +90,18 @@ void main() {
       final cache = FailingDecoder(assetBundle: bundle);
 
       expect(
-        () => cache.load('test/assets/test.txt'), // Use full path to existing test file
+        () => cache.load(
+            'test/assets/test.txt'), // Use full path to existing test file
         throwsA(isA<DecodingException>()
             .having((e) => e.assetKey, 'assetKey', 'test/assets/test.txt')
-            .having((e) => e.originalException, 'originalException', isA<Exception>())),
+            .having((e) => e.originalException, 'originalException',
+                isA<Exception>())),
       );
     });
 
-    test('Failed asset loads are cached - same exception thrown for repeated calls', () async {
+    test(
+        'Failed asset loads are cached - same exception thrown for repeated calls',
+        () async {
       final bundle = FileAssetBundle();
       final cache = TextAssetCache(assetBundle: bundle);
 
@@ -120,7 +125,6 @@ void main() {
       expect(secondException, isNotNull);
       // The exceptions have the same properties even if they're different instances
       expect(firstException!.assetKey, secondException!.assetKey);
-      expect(firstException.fullPath, secondException.fullPath);
       expect(firstException.message, secondException.message);
     });
 

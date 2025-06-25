@@ -3,9 +3,6 @@ abstract class AssetCacheException implements Exception {
   /// The error message
   final String message;
 
-  /// The asset key that caused the exception
-  final String? assetKey;
-
   /// The original exception that caused the decoding to fail
   final Object? originalException;
 
@@ -15,30 +12,32 @@ abstract class AssetCacheException implements Exception {
   /// Constructor for [AssetCacheException]
   const AssetCacheException(
     this.message, {
-    this.assetKey,
     this.originalException,
     this.originalStackTrace,
   });
 
   @override
   String toString() {
-    if (assetKey != null) {
-      return '$runtimeType: $message (asset: $assetKey)';
+    final buffer = StringBuffer('AssetCacheException: $message');
+    if (originalException != null) {
+      buffer.write(' (caused by: $originalException)');
     }
-    return '$runtimeType: $message';
+    if (originalStackTrace != null) {
+      buffer.write('\nStack trace: $originalStackTrace');
+    }
+    return buffer.toString();
   }
 }
 
 /// Exception thrown when an asset cannot be found or loaded
 class AssetNotFoundException extends AssetCacheException {
-  /// The full path that was attempted to load
-  final String? fullPath;
+  /// The asset key that caused the exception
+  final String? assetKey;
 
   /// Constructor for [AssetNotFoundException]
   const AssetNotFoundException(
     super.message, {
-    this.fullPath,
-    super.assetKey,
+    this.assetKey,
     super.originalException,
     super.originalStackTrace,
   });
@@ -49,9 +48,6 @@ class AssetNotFoundException extends AssetCacheException {
     if (assetKey != null) {
       buffer.write(' (asset: $assetKey)');
     }
-    if (fullPath != null) {
-      buffer.write(' (path: $fullPath)');
-    }
     if (originalException != null) {
       buffer.write(' (caused by: $originalException)');
     }
@@ -61,10 +57,13 @@ class AssetNotFoundException extends AssetCacheException {
 
 /// Exception thrown when an asset cannot be decoded to the expected type
 class DecodingException extends AssetCacheException {
+  /// The asset key that caused the exception
+  final String? assetKey;
+
   /// Constructor for [DecodingException]
   const DecodingException(
     super.message, {
-    super.assetKey,
+    this.assetKey,
     super.originalException,
     super.originalStackTrace,
   });
@@ -74,6 +73,31 @@ class DecodingException extends AssetCacheException {
     final buffer = StringBuffer('DecodingException: $message');
     if (assetKey != null) {
       buffer.write(' (asset: $assetKey)');
+    }
+    if (originalException != null) {
+      buffer.write(' (caused by: $originalException)');
+    }
+    return buffer.toString();
+  }
+}
+
+class PreLoadingAssetsNotFoundException extends AssetCacheException {
+  /// The list of asset keys that were not found
+  final List<String> assetKeys;
+
+  /// Constructor for [PreLoadingAssetsNotFoundException]
+  const PreLoadingAssetsNotFoundException(
+    super.message, {
+    required this.assetKeys,
+    super.originalException,
+    super.originalStackTrace,
+  });
+
+  @override
+  String toString() {
+    final buffer = StringBuffer('PreLoadingAssetsNotFoundException: $message');
+    if (assetKeys.isNotEmpty) {
+      buffer.write(' (missing assets: ${assetKeys.join(', ')})');
     }
     if (originalException != null) {
       buffer.write(' (caused by: $originalException)');

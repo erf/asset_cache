@@ -10,7 +10,19 @@ final jsonAssets = JsonAssetCache(basePath: 'assets/json/');
 final imageAssets = ImageAssetCache(basePath: 'assets/images/');
 final byteAssets = ByteDataAssetCache(basePath: 'assets/images/');
 
-void main() {
+final imageAssetsList = ImageAssetCache(basePath: 'assets/images/');
+
+final imagesToPreload = [
+  'asset1.jpg',
+  'asset2.jpg',
+  'asset3.jpg',
+];
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await imageAssetsList.preload(imagesToPreload);
+
   runApp(const MyApp());
 }
 
@@ -123,6 +135,31 @@ class MyHomePageState extends State<MyHomePage> {
                 }
               },
             ),
+            // preloaded images
+            for (int i = 0; i < imagesToPreload.length; i++)
+              Builder(
+                builder: (context) {
+                  final asset = imagesToPreload[i];
+                  double offset = i * 50 + 100;
+                  return Transform(
+                    transform: Matrix4.identity()
+                      ..setEntry(1, 3, offset)
+                      ..rotateZ(0.2 * i),
+                    child: FutureBuilder<ui.Image>(
+                      future: imageAssets.load(asset),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return CustomPaint(
+                            painter: MyImagePainter(snapshot.data!),
+                          );
+                        } else {
+                          return const Text('loading..');
+                        }
+                      },
+                    ),
+                  );
+                },
+              ),
           ],
         ),
       ),
