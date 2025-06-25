@@ -1,3 +1,9 @@
+## [2.2.0] - 25 June 2025
+- updated dependencies and Dart SDK constraints
+- add cache management methods: `clear()`, `remove()`, `contains()`, `size`
+- add `preload()` method for concurrent asset loading
+- add custom exceptions: `AssetCacheException`, `AssetNotFoundException`, `DecodingException`, `PreLoadingAssetsNotFoundException`
+
 ## [2.1.0] - 6 dec 2023
 - update packages
 - use super in constructors
