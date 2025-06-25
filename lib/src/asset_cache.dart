@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 
+import 'exceptions.dart';
 import 'generic_cache.dart';
 
 /// Given a [ByteData] return a type [T]
@@ -27,8 +28,32 @@ class AssetCache<T> extends GenericCache<T> {
   @override
   Future<T> loadAsset(String key) async {
     final String fullPath = path.join(basePath ?? '', key);
-    final ByteData bytes = await (assetBundle ?? rootBundle).load(fullPath);
-    final T asset = await decoder(bytes);
-    return asset;
+
+    // First, try to load the asset bytes
+    final ByteData bytes;
+    try {
+      bytes = await (assetBundle ?? rootBundle).load(fullPath);
+    } catch (e, stackTrace) {
+      throw AssetNotFoundException(
+        'Failed to load asset',
+        assetKey: key,
+        fullPath: fullPath,
+        originalException: e,
+        originalStackTrace: stackTrace,
+      );
+    }
+
+    // Then, try to decode the asset
+    try {
+      final T asset = await decoder(bytes);
+      return asset;
+    } catch (e, stackTrace) {
+      throw DecodingException(
+        'Failed to decode asset',
+        assetKey: key,
+        originalException: e,
+        originalStackTrace: stackTrace,
+      );
+    }
   }
 }
