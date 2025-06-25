@@ -1,4 +1,4 @@
-library asset_cache;
+library;
 
 export 'src/asset_cache.dart';
 export 'src/byte_data_asset_cache.dart';
