@@ -160,9 +160,14 @@ void main() {
   });
 
   group('Preload functionality', () {
-    test('preload loads multiple assets concurrently and returns results', () async {
+    test('preload loads multiple assets concurrently and returns results',
+        () async {
       final cache = MyCache();
-      final keys = ['item1', 'item2', 'item3']; // MyCache just returns the key as value
+      final keys = [
+        'item1',
+        'item2',
+        'item3'
+      ]; // MyCache just returns the key as value
 
       // Preload multiple assets
       final results = await cache.preload(keys);
@@ -190,9 +195,9 @@ void main() {
 
     test('preload with empty list returns empty results', () async {
       final cache = MyCache();
-      
+
       final results = await cache.preload([]);
-      
+
       expect(results, isEmpty);
       expect(cache.size, 0);
       expect(cache.counter, 0);
@@ -200,9 +205,9 @@ void main() {
 
     test('preload with single item works', () async {
       final cache = MyCache();
-      
+
       final results = await cache.preload(['single']);
-      
+
       expect(results.length, 1);
       expect(results.first, 'single');
       expect(cache.size, 1);
@@ -213,14 +218,14 @@ void main() {
     test('preload with duplicate keys only loads once per key', () async {
       final cache = MyCache();
       final keys = ['dup1', 'dup2', 'dup1', 'dup2', 'dup1'];
-      
+
       final results = await cache.preload(keys);
-      
+
       // Should return all requested items (including duplicates)
       expect(results.length, 5);
       expect(results.where((r) => r == 'dup1').length, 3);
       expect(results.where((r) => r == 'dup2').length, 2);
-      
+
       // But only unique keys should be loaded/cached
       expect(cache.size, 2);
       expect(cache.contains('dup1'), true);
@@ -230,20 +235,20 @@ void main() {
 
     test('preload mixed with regular load operations', () async {
       final cache = MyCache();
-      
+
       // Load one asset normally
       await cache.load('normal');
       expect(cache.counter, 1);
-      
+
       // Preload some assets including the already loaded one
       final results = await cache.preload(['normal', 'preload1', 'preload2']);
-      
+
       // Should return all requested assets
       expect(results.length, 3);
       expect(results, contains('normal'));
       expect(results, contains('preload1'));
       expect(results, contains('preload2'));
-      
+
       // Should have 3 total assets, but only 2 additional loads
       expect(cache.size, 3);
       expect(cache.counter, 3);
@@ -252,24 +257,25 @@ void main() {
       expect(cache.contains('preload2'), true);
     });
 
-    test('preload throws PreLoadingAssetsNotFoundException on failure', () async {
+    test('preload throws PreLoadingAssetsNotFoundException on failure',
+        () async {
       final cache = FailingOnSpecificKeysCache(['fail1']);
-      
+
       expect(
         () => cache.preload(['success1', 'fail1', 'success2']),
         throwsA(isA<PreLoadingAssetsNotFoundException>()
-            .having((e) => e.assetKeys, 'assetKeys', 
-                contains('fail1'))
-            .having((e) => e.originalException, 'originalException', isNotNull)),
+            .having((e) => e.assetKeys, 'assetKeys', contains('fail1'))
+            .having(
+                (e) => e.originalException, 'originalException', isNotNull)),
       );
     });
 
     test('preload maintains order of results', () async {
       final cache = MyCache();
       final keys = ['third', 'first', 'second', 'first', 'third'];
-      
+
       final results = await cache.preload(keys);
-      
+
       // Results should maintain the order of the input keys
       expect(results.length, 5);
       expect(results[0], 'third');
@@ -282,26 +288,26 @@ void main() {
     test('preload integrates with cache management methods', () async {
       final cache = MyCache();
       final keys = ['asset1', 'asset2', 'asset3'];
-      
+
       // Preload assets
       await cache.preload(keys);
       expect(cache.size, 3);
-      
+
       // Remove one asset
       expect(cache.remove('asset2'), true);
       expect(cache.size, 2);
       expect(cache.contains('asset2'), false);
-      
+
       // Preload again should reload the removed asset
       await cache.preload(['asset2']);
       expect(cache.size, 3);
       expect(cache.contains('asset2'), true);
       expect(cache.counter, 4); // 3 initial + 1 reload
-      
+
       // Clear all
       cache.clear();
       expect(cache.size, 0);
-      
+
       // Preload after clear should reload everything
       await cache.preload(keys);
       expect(cache.size, 3);
